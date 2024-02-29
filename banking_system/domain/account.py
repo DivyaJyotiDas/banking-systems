@@ -4,7 +4,7 @@ class Account(object):
     """
         Account class 
     """
-    def __init__(self, name: str, balance: float, account_id=None):
+    def __init__(self, name: str, balance: float):
         """_summary_
 
         Args:
