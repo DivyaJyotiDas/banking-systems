@@ -44,14 +44,15 @@ def test_negative_account(mock_val):
                                 account_id='9a03987e-c98c-4e74-b5fb-4d94803e3a66', 
                                 transaction_type='deposit').make_transaction(amount=100)
     
-    value = {"balance":100}
+    mock_val.return_value = {"balance":100}
     
 
-    return_value = TransactionUseCase(
+    val = TransactionUseCase(
                         account_id='9a03987e-c98c-4e74-b5fb-4d94803e3a66', 
                         transaction_type='withdraw').make_transaction(amount=1000000000)
     
-    mock_val.return_value = value['balance'] - 1000000000
+
+    val = mock_val.return_value['balance'] - 1000000000
     
-    assert mock_val.return_value < 0
+    assert val < 0
     
