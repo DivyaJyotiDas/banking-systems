@@ -36,6 +36,8 @@ class FileRepo(Repo):
                     pass
             with open(FILE_DB, 'w') as f:
                 json.dump(data, f)
+
+            return True
         except Exception as ex:
             raise ex
 

@@ -25,9 +25,9 @@ class TransactionUseCase(object):
         match param:
             case 'deposit':
                 acc_obj  = FileRepo(self).list(self.account_id)
-                FileRepo(self).update(acc_obj, 'customer_balance', amount)
+                return FileRepo(self).update(acc_obj, 'customer_balance', amount)
             case 'withdraw':
                 acc_obj  = FileRepo(self).list(self.account_id)
                 if acc_obj.get('customer_balance') - amount < 0:
                     raise Exception('Not Enough Fund in your Account.')
-                FileRepo(self).update(acc_obj, 'customer_balance', -amount)
+                return FileRepo(self).update(acc_obj, 'customer_balance', -amount)
