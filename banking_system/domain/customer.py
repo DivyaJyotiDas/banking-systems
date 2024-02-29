@@ -33,9 +33,10 @@ class Customer(Account):
             _type_: _description_
         """
         return {
-            "Customer Name": self.name,
-            "Customer ID": self.cutomer_id,
-            "Account Number": self.account_id,
-            "Phone Number": self.phone_number,
-            "Email Address": self.email
+            "customer_name": self.name,
+            "customer_id": self.cutomer_id,
+            "customer_account_number": self.account_id,
+            "customer_balance": self.balance,
+            "customer_phone_number": self.phone_number,
+            "customer_email_address": self.email
         }

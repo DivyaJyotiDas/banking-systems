@@ -1,4 +1,5 @@
 from banking_system.domain.customer import Customer
+from banking_system.repository.filerepo import FileRepo
 
 class CreateAccountsUseCase(object):
     """_summary_
@@ -18,4 +19,5 @@ class CreateAccountsUseCase(object):
         Returns:
             _type_: _description_
         """
-        return Customer(name, email, phone_number, balance)
+        cust_obj = Customer(name, email, phone_number, balance)
+        FileRepo(cust_obj).create()

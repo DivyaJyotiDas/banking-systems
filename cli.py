@@ -6,11 +6,11 @@ from banking_system.use_cases.transactions.make_transactions_usecase import Tran
 # Driver Method.
 if __name__ == '__main__':
     account_obj = CreateAccountsUseCase().create_account(
-                        'Divya', 
-                        'divyajyotidas15@gmail.com', 
-                        '8329140439',
-                        1000)
-    print(account_obj.to_dict())
+                        'Roshni', 
+                        'diva.mishra19@gmail.com', 
+                        '8373850527',
+                        500)
+    #print(account_obj.to_dict())
 
-    transx_obj = TransactionUseCase(account_id=1, amount=100, transaction_type='deposit').make_transaction()
+    #transx_obj = TransactionUseCase(account_id=1, amount=100, transaction_type='deposit').make_transaction()
     

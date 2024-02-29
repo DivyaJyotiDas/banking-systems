@@ -12,12 +12,24 @@ class Account(object):
             balance (float): _description_
             account_id (_type_, optional): _description_. Defaults to None.
         """
-        self.account_id = '1' #str(uuid.uuid4())
+        self.account_id = str(uuid.uuid4())
         self.account_name = name +'-'+self.account_id
         self.balance = balance
 
     def __repr__(self):
         return "Account(id:{0}, name:{1})".format(self.account_id, self.account_name)
+    
+    def to_dict(self):
+        """_summary_
+
+        Returns:
+            _type_: _description_
+        """
+        return {
+            "account_id": self.account_id,
+            "account_name": self.account_name,
+            "account_balance": self.balance
+        }
     
     def deposit(self, amount):
         """_summary_
