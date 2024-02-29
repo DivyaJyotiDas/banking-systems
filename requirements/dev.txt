@@ -5,5 +5,5 @@ wheel
 watchdog
 flake8
 Sphinx
-pydantic
+
 
