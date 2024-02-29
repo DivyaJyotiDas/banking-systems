@@ -15,3 +15,8 @@ if __name__ == '__main__':
                         account_id='9a03987e-c98c-4e74-b5fb-4d94803e3a66', 
                         transaction_type='deposit').make_transaction(amount=100)
     
+
+    transx_obj = TransactionUseCase(
+                        account_id='9a03987e-c98c-4e74-b5fb-4d94803e3a66', 
+                        transaction_type='withdraw').make_transaction(amount=200)
+    
