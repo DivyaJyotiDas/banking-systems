@@ -1,5 +1,8 @@
 import uuid
 
+from banking_system.repository.filerepo import FileRepo
+from banking_system.repository.account_repository import AccountRepository
+
 class Account(object):
     """
         Account class 
@@ -15,6 +18,7 @@ class Account(object):
         self.account_id = str(uuid.uuid4())
         self.account_name = name +'-'+self.account_id
         self.balance = balance
+        self.repo = AccountRepository()
 
     def __repr__(self):
         return "Account(id:{0}, name:{1})".format(self.account_id, self.account_name)
@@ -31,13 +35,18 @@ class Account(object):
             "account_balance": self.balance
         }
     
+    def create_account(self):
+        """
+        """
+        self.repo.save_account(self.to_dict())
+    
     def deposit(self, amount):
         """_summary_
 
         Args:
             amount (_type_): _description_
         """
-        pass
+        self.repo.deposit()
 
     def withdraw(self, amount):
         """_summary_
@@ -45,9 +54,9 @@ class Account(object):
         Args:
             amount (_type_): _description_
         """
-        pass
+        self.repo.withdraw(amount)
 
     def get_balance(self):
         """_summary_
         """
-        pass
+        self.repo.get_balance()
