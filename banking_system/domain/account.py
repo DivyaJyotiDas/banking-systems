@@ -36,9 +36,12 @@ class Account(object):
         }
     
     def create_account(self):
+        """ This method responsible for creating Acoount.
         """
-        """
-        self.repo.save_account(self.to_dict())
+        try:
+            self.repo.save_account(self.to_dict())
+        except Exception as ex:
+            raise ex
     
     def deposit(self, amount):
         """_summary_
