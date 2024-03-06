@@ -25,15 +25,21 @@ class Customer(Account):
 
     @classmethod
     def get_account(cls, account_id):
-        account_val = AccountRepository().find_account_by_id(account_id=account_id)
-        return Customer(
-            customer_id=account_val['customer_id'],
-            account_id=account_val['customer_account_number'],
-            name=account_val['customer_name'],
-            email=account_val['customer_email_address'],
-            phone_number=account_val['customer_phone_number'],
-            balance=account_val['customer_balance']
-            )
+        """
+        class method to create Customer Object that EXist in DB.
+        """
+        try:
+            account_val = AccountRepository().find_account_by_id(account_id=account_id)
+            return Customer(
+                customer_id=account_val['customer_id'],
+                account_id=account_val['customer_account_number'],
+                name=account_val['customer_name'],
+                email=account_val['customer_email_address'],
+                phone_number=account_val['customer_phone_number'],
+                balance=account_val['customer_balance']
+                )
+        except Exception as ex:
+            raise ex
     
     def __repr__(self):
         return "Account(id:{0}, Accountname:{1}, Customer Name:{2}) \

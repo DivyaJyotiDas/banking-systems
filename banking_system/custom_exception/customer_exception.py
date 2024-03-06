@@ -33,3 +33,7 @@ class AccountWithdrawlException(Exception):
 class AccountBalancelException(Exception):
      def __init__(self, *args: object) -> None:
         super().__init__(*args)
+
+class TransactionError(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)

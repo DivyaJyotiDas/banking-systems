@@ -1,6 +1,7 @@
 from banking_system.domain.account import Account
 from banking_system.domain.customer import Customer
 from banking_system.repository.filerepo import FileRepo
+from banking_system.custom_exception import customer_exception as exc
 
 class TransactionUseCase(object):
     """_summary_
@@ -21,12 +22,18 @@ class TransactionUseCase(object):
     def make_transaction(self, amount):
         """Method responsible to interact external world(API, CLI) for deposit or withdraw
         """
-        param = self.transaction_type.lower()
-        match param:
-            case 'deposit':
-                account_obj = Customer.get_account(self.account_id)
-                return account_obj.deposit(amount)
+        try:
+            if self.transaction_type:
+                param = self.transaction_type.lower()
+            match param:
+                case 'deposit':
+                    account_obj = Customer.get_account(self.account_id)
+                    return account_obj.deposit(amount)
                 
-            case 'withdraw':
-                account_obj = Customer.get_account(self.account_id)
-                return account_obj.withdraw(amount)
+                case 'withdraw':
+                    account_obj = Customer.get_account(self.account_id)
+                    return account_obj.withdraw(amount)
+        except exc.TransactionError as ex:
+            raise ex
+        except Exception as ex:
+            raise ex
