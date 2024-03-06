@@ -42,5 +42,5 @@ def test_withdrawl_when_amount_provided_should_withdraw(mocker):
     }
     assert FileRepo(file_db=FILE_PATH) \
         .update('6767b700-ac3c-4ef5-9cab-5576b7a1890d', 
-                'customer_balance', -100).get('customer_balance')== test_account['customer_balance']-100
+                'customer_balance', -100).get('customer_balance')== 500
 
