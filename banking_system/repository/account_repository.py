@@ -14,7 +14,10 @@ As we go on adding multiple drivers repo, we need to add in Initializer and call
 class AccountRepository(filerepo.FileRepo):
     def __init__(self) -> None:
         # File Based Repository
-        self.repo = filerepo.get_file_db()
+        try:
+            self.repo = filerepo.get_file_db()
+        except exc.RepoDriverNotFoundException as ex:
+            raise ex
 
     def save_account(self, account_details):
         try:

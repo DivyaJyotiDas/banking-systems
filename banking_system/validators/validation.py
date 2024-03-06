@@ -5,7 +5,10 @@ def validate_customer(func):
             Leaving as of now.
         """
         #
-        #
+        # Befor calling function validation.
         #
         func(*args, **kwargs)
+        #
+        # After calling function validation
+        #
     return inner

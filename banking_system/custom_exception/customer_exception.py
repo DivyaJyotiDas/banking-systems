@@ -37,3 +37,7 @@ class AccountBalancelException(Exception):
 class TransactionError(Exception):
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
+
+class RepoDriverNotFoundException(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)

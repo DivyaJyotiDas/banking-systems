@@ -1,6 +1,7 @@
 import uuid
 from banking_system.domain.account import Account
 from banking_system.repository.account_repository import AccountRepository
+from banking_system.custom_exception import customer_exception as exc
 
 class Customer(Account):
     """_summary_
@@ -38,6 +39,8 @@ class Customer(Account):
                 phone_number=account_val['customer_phone_number'],
                 balance=account_val['customer_balance']
                 )
+        except exc.AccountNotFoundException as ex:
+            raise ex
         except Exception as ex:
             raise ex
     

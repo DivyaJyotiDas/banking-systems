@@ -52,7 +52,12 @@ class Account(object):
         Args:
             amount (float): Amount
         """
-        self.repo.deposit(account=self.to_dict(),  amount=amount)
+        try:
+            self.repo.deposit(account=self.to_dict(),  amount=amount)
+        except exc.AccountDepostException as ex:
+            raise ex
+        except Exception as ex:
+            raise ex
 
     def withdraw(self, amount):
         """_summary_
@@ -60,9 +65,19 @@ class Account(object):
         Args:
             amount (_type_): _description_
         """
-        self.repo.withdraw(account=self.to_dict(),  amount=amount)
+        try:
+            self.repo.withdraw(account=self.to_dict(),  amount=amount)
+        except exc.AccountWithdrawlException as ex:
+            raise ex
+        except Exception as ex:
+            raise ex
 
     def get_balance(self):
         """_summary_
         """
-        self.repo.get_balance()
+        try:
+            self.repo.get_balance()
+        except exc.AccountBalancelException as ex:
+            raise ex
+        except Exception as ex:
+            raise ex
