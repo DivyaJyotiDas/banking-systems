@@ -7,7 +7,7 @@ class Account(object):
     """
         Account class 
     """
-    def __init__(self, name: str, balance: float):
+    def __init__(self, name: str, balance: float, account_id=None):
         """_summary_
 
         Args:
@@ -15,7 +15,7 @@ class Account(object):
             balance (float): _description_
             account_id (_type_, optional): _description_. Defaults to None.
         """
-        self.account_id = str(uuid.uuid4())
+        self.account_id = str(uuid.uuid4()) if account_id is None else account_id
         self.account_name = name +'-'+self.account_id
         self.balance = balance
         self.repo = AccountRepository()
@@ -34,7 +34,7 @@ class Account(object):
             "account_name": self.account_name,
             "account_balance": self.balance
         }
-    
+
     def create_account(self):
         """ This method responsible for creating Acoount.
         """
@@ -44,12 +44,12 @@ class Account(object):
             raise ex
     
     def deposit(self, amount):
-        """_summary_
+        """This method responsible for deposit of amount in account
 
         Args:
-            amount (_type_): _description_
+            amount (float): Amount
         """
-        self.repo.deposit()
+        self.repo.deposit(account=self.to_dict(),  amount=amount)
 
     def withdraw(self, amount):
         """_summary_
@@ -57,7 +57,7 @@ class Account(object):
         Args:
             amount (_type_): _description_
         """
-        self.repo.withdraw(amount)
+        self.repo.withdraw(account=self.to_dict(),  amount=amount)
 
     def get_balance(self):
         """_summary_

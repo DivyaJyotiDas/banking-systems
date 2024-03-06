@@ -1,5 +1,6 @@
 import uuid
 from banking_system.domain.account import Account
+from banking_system.repository.account_repository import AccountRepository
 
 class Customer(Account):
     """_summary_
@@ -7,7 +8,7 @@ class Customer(Account):
     Args:
         Account (_type_): _description_
     """
-    def __init__(self, name: str, email: str, phone_number: int, balance: float):
+    def __init__(self, name: str, email: str, phone_number: int, balance: float, customer_id=None, account_id=None):
         """_summary_
 
         Args:
@@ -16,11 +17,23 @@ class Customer(Account):
             phone_number (int): _description_
             balance (float): _description_
         """
-        super().__init__(name, balance)
-        self.cutomer_id = str(uuid.uuid4())
+        super().__init__(name, balance, account_id=account_id)
+        self.cutomer_id = str(uuid.uuid4()) if customer_id is None else customer_id
         self.name = name
         self.email = email
         self.phone_number = phone_number
+
+    @classmethod
+    def get_account(cls, account_id):
+        account_val = AccountRepository().find_account_by_id(account_id=account_id)
+        return Customer(
+            customer_id=account_val['customer_id'],
+            account_id=account_val['customer_account_number'],
+            name=account_val['customer_name'],
+            email=account_val['customer_email_address'],
+            phone_number=account_val['customer_phone_number'],
+            balance=account_val['customer_balance']
+            )
     
     def __repr__(self):
         return "Account(id:{0}, Accountname:{1}, Customer Name:{2}) \

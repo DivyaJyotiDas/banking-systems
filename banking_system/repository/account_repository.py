@@ -8,17 +8,19 @@ class AccountRepository(filerepo.FileRepo):
     def save_account(self, account_details):
         self.repo.create(account_details)
 
-    def deposit(self):
-        self.repo.update()
+    def deposit(self, account, amount):
+        account_id = account.get('customer_account_number')
+        self.repo.update(account_id, 'customer_balance', amount)
 
-    def withdraw(self):
-        self.repo.update()
+    def withdraw(self, account, amount):
+        account_id = account.get('customer_account_number')
+        self.repo.update(account_id, 'customer_balance', -amount)
 
     def get_balance(self, account_id):
-        self.repo.get_balance(account_id)
+        return self.repo.get_balance(account_id)
 
     def find_account_by_id(self, account_id):
-        self.repo.list(account_id)
+        return self.repo.list(account_id)
 
     def find_accounts_by_customer_id(self, customer_id):
-        self.repo.list(customer_id)
+        return self.repo.list(customer_id)

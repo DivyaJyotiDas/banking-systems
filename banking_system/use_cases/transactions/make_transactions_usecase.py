@@ -1,4 +1,5 @@
 from banking_system.domain.account import Account
+from banking_system.domain.customer import Customer
 from banking_system.repository.filerepo import FileRepo
 
 class TransactionUseCase(object):
@@ -8,26 +9,24 @@ class TransactionUseCase(object):
         object (_type_): _description_
     """
     def __init__(self, account_id, transaction_type) -> None:
-        """_summary_
-
+        """This method is used to initialize Transaction class.
         Args:
-            account_id (_type_): _description_
-            amount (_type_): _description_
-            transaction_type (_type_): _description_
+            account_id (str): Account Id.
+            amount (float): Amount 
+            transaction_type (str): set of {'deposit', 'withdraw'}
         """
         self.account_id = account_id
         self.transaction_type = transaction_type
 
     def make_transaction(self, amount):
-        """_summary_
+        """Method responsible to interact external world(API, CLI) for deposit or withdraw
         """
         param = self.transaction_type.lower()
         match param:
             case 'deposit':
-                acc_obj  = FileRepo(self).list(self.account_id)
-                return FileRepo(self).update(acc_obj, 'customer_balance', amount)
+                account_obj = Customer.get_account(self.account_id)
+                return account_obj.deposit(amount)
+                
             case 'withdraw':
-                acc_obj  = FileRepo(self).list(self.account_id)
-                if acc_obj.get('customer_balance') - amount < 0:
-                    raise Exception('Not Enough Fund in your Account.')
-                return FileRepo(self).update(acc_obj, 'customer_balance', -amount)
+                account_obj = Customer.get_account(self.account_id)
+                return account_obj.withdraw(amount)

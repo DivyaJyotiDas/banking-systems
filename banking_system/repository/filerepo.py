@@ -3,6 +3,7 @@ import json
 from banking_system.repository.base import Repo
 
 
+
 class FileRepo(Repo):
     def __init__(self) -> None:
         self.file_db = os.path.join(os.getcwd(), 'file_db.json')
@@ -29,7 +30,7 @@ class FileRepo(Repo):
                 try:
                     data = json.load(f)
                     for each in data:
-                        if each.get('customer_account_number') == account_id.get('customer_account_number'):
+                        if each.get('customer_account_number') == account_id:
                             each[key] = each[key]+value
                 except Exception as ex:
                     pass
