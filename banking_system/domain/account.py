@@ -1,4 +1,5 @@
 import uuid
+import threading
 
 from banking_system.custom_exception import customer_exception as exc
 from banking_system.repository.filerepo import FileRepo
@@ -8,6 +9,7 @@ class Account(object):
     """
         Account class 
     """
+    account_lock = threading.Lock() #Basic Class Level Lock mechanism to prevent Race condition.
     def __init__(self, name: str, balance: float, account_id=None):
         """_summary_
 
@@ -53,7 +55,8 @@ class Account(object):
             amount (float): Amount
         """
         try:
-            self.repo.deposit(account=self.to_dict(),  amount=amount)
+            with Account.account_lock:
+                self.repo.deposit(account=self.to_dict(),  amount=amount)
         except exc.AccountDepostException as ex:
             raise ex
         except Exception as ex:
@@ -66,7 +69,8 @@ class Account(object):
             amount (_type_): _description_
         """
         try:
-            self.repo.withdraw(account=self.to_dict(),  amount=amount)
+            with Account.account_lock:
+                self.repo.withdraw(account=self.to_dict(),  amount=amount)
         except exc.AccountWithdrawlException as ex:
             raise ex
         except Exception as ex:
@@ -76,7 +80,8 @@ class Account(object):
         """_summary_
         """
         try:
-            self.repo.get_balance()
+            with Account.account_lock:
+                self.repo.get_balance()
         except exc.AccountBalancelException as ex:
             raise ex
         except Exception as ex:
