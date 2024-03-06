@@ -10,6 +10,26 @@ class CustomerNotFound(CustomException):
         super().__init__(message, payload)
     
     
-class AccountNotCreated(Exception):
+class AccountNotCreatedException(Exception):
     def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+class AccountNotFoundException(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+class AccountNotFoundForCustomerException(Exception):
+    def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+class AccountDepostException(Exception):
+     def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+class AccountWithdrawlException(Exception):
+     def __init__(self, *args: object) -> None:
+        super().__init__(*args)
+
+class AccountBalancelException(Exception):
+     def __init__(self, *args: object) -> None:
         super().__init__(*args)

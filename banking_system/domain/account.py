@@ -1,5 +1,6 @@
 import uuid
 
+from banking_system.custom_exception import customer_exception as exc
 from banking_system.repository.filerepo import FileRepo
 from banking_system.repository.account_repository import AccountRepository
 
@@ -40,6 +41,8 @@ class Account(object):
         """
         try:
             self.repo.save_account(self.to_dict())
+        except exc.AccountNotCreated as ex:
+            raise('Account Could Not Be Created.')
         except Exception as ex:
             raise ex
     
